@@ -40,8 +40,8 @@ app.use((_req, res) => {
 
 // ─── Start ────────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`\n🚀 100x Socials API running on http://localhost:${PORT}`);
-  console.log(`📋 Health: http://localhost:${PORT}/health\n`);
+  console.log(`\n100x Socials API running on http://localhost:${PORT}`);
+  console.log(`Health: http://localhost:${PORT}/health\n`);
 });
 
 export default app;
