@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🌱 Seeding database with dummy data...');
+  console.log('Seeding database with dummy data...');
 
   // 1. Setup Whitelisted Members
   const memberEmails = [
