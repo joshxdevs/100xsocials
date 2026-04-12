@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS (CSS Variables)
+   ═══════════════════════════════════════════ */
+:root {
+  --bg:              #151515;
+  --surface:         #1c1c1c;
+  --surface-high:    #262626;
+  --primary:         #94d7f2;
+  --primary-light:   #d1eefb;
+  --muted:           #9c958a;
+  --content:         #f3efe8;
+  --border:          rgba(255, 255, 255, 0.08);
+  --border-hover:    rgba(255, 255, 255, 0.14);
+  --glass-5:         rgba(255, 255, 255, 0.03);
+  --glass-10:        rgba(255, 255, 255, 0.06);
+  --primary-glass:   rgba(148, 215, 242, 0.12);
+  --primary-border:  rgba(148, 215, 242, 0.28);
+}
+
+:root.light {
+  --bg:              #f5f2ea;
+  --surface:         #fffdf9;
+  --surface-high:    #ece6dc;
+  --primary:         #2e8eb5;
+  --primary-light:   #79c7e3;
+  --muted:           #80796f;
+  --content:         #1c1a17;
+  --border:          rgba(32, 29, 24, 0.08);
+  --border-hover:    rgba(32, 29, 24, 0.14);
+  --glass-5:         rgba(32, 29, 24, 0.03);
+  --glass-10:        rgba(32, 29, 24, 0.05);
+  --primary-glass:   rgba(46, 142, 181, 0.08);
+  --primary-border:  rgba(46, 142, 181, 0.16);
+}
+
+/* ═══════════════════════════════════════════
+   BASE STYLES
+   ═══════════════════════════════════════════ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--content);
+    background-image: linear-gradient(180deg, rgba(255,255,255,0.018) 0%, transparent 240px);
+    @apply tracking-tight m-0 p-0 overflow-x-hidden transition-colors duration-500;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Manrope', 'Inter', sans-serif;
+    @apply tracking-tight;
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--bg);
+  }
+
+  /* Custom Scrollbar - Sophisticated & Minimal */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { 
+    background: var(--border-hover); 
+    border-radius: 99px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  *:hover::-webkit-scrollbar-thumb { opacity: 1; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+}
+
+/* ═══════════════════════════════════════════
+   PREMIUM UTILITIES
+   ═══════════════════════════════════════════ */
+@layer utilities {
+  .animate-fade-in { animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-fade-in-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .animate-slide-up { animation: slideUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  
+  .glass {
+    @apply backdrop-blur-xl border;
+    background-color: color-mix(in srgb, var(--surface) 60%, transparent);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--content) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+  .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+  .skeleton-block,
+  .skeleton-block-predictive,
+  .skeleton-block-matte {
+    position: relative;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--content) 8%, var(--surface-high));
+    border: 1px solid color-mix(in srgb, var(--border) 92%, transparent);
+  }
+
+  .skeleton-block::after,
+  .skeleton-block-predictive::after,
+  .skeleton-block-matte::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-130%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--content) 4%, transparent) 43%,
+      color-mix(in srgb, var(--content) 8%, transparent) 50%,
+      color-mix(in srgb, var(--content) 4%, transparent) 57%,
+      transparent 100%
+    );
+    animation: skeletonShimmer 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    opacity: 0.38;
+    pointer-events: none;
+  }
+
+  .skeleton-block-predictive {
+    background:
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--surface-high) 84%, var(--primary) 8%) 0%,
+        color-mix(in srgb, var(--surface) 88%, var(--content) 5%) 52%,
+        color-mix(in srgb, var(--surface-high) 86%, var(--primary-light) 7%) 100%
+      );
+    border-color: color-mix(in srgb, var(--primary) 16%, var(--border));
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--primary-light) 18%, transparent),
+      0 0 0 1px color-mix(in srgb, var(--primary) 4%, transparent);
+  }
+
+  .skeleton-block-predictive::after {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--primary-light) 10%, transparent) 39%,
+      color-mix(in srgb, var(--content) 16%, transparent) 50%,
+      color-mix(in srgb, var(--primary) 18%, transparent) 61%,
+      transparent 100%
+    );
+    animation-duration: 1.65s;
+    opacity: 0.62;
+  }
+
+  .skeleton-block-matte {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface-high) 92%, var(--content) 3%) 0%,
+      color-mix(in srgb, var(--surface) 95%, var(--content) 2%) 100%
+    );
+    border-color: color-mix(in srgb, var(--content) 10%, var(--border));
+    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--content) 4%, transparent);
+  }
+
+  .skeleton-block-matte::after {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      color-mix(in srgb, var(--content) 3%, transparent) 37%,
+      color-mix(in srgb, var(--content) 9%, transparent) 50%,
+      color-mix(in srgb, var(--content) 3%, transparent) 63%,
+      transparent 100%
+    );
+    animation-duration: 1.8s;
+    opacity: 0.42;
+  }
+
+  .predictive-shell {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .predictive-shell::before {
+    content: "";
+    position: absolute;
+    inset-inline: 1.5rem;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--primary) 30%, transparent) 48%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .predictive-shell::after {
+    content: "";
+    position: absolute;
+    top: -4.5rem;
+    right: -3.5rem;
+    width: 11rem;
+    height: 11rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+    filter: blur(38px);
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .matte-shell {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .matte-shell::before {
+    content: "";
+    position: absolute;
+    inset-inline: 1.5rem;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--content) 8%, transparent) 48%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes skeletonShimmer {
+  0% { transform: translateX(-130%); }
+  100% { transform: translateX(180%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-block::after,
+  .skeleton-block-predictive::after,
+  .skeleton-block-matte::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   COMPONENT CLASSES
+   ═══════════════════════════════════════════ */
+@layer components {
+  /* ── Cards ── */
+  .card {
+    @apply bg-surface border border-border transition-all duration-300;
+    border-radius: 22px;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18);
+  }
+
+  .card-hover {
+    @apply card hover:border-border-hover hover:-translate-y-1;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  /* ── Buttons ── */
+  .btn-primary {
+    @apply bg-primary text-bg font-semibold tracking-[0.02em] rounded-2xl transition-all duration-300
+           hover:brightness-95 active:scale-95 disabled:opacity-40 disabled:scale-100 flex items-center justify-center;
+  }
+
+  .btn-ghost {
+    @apply border border-border text-content font-medium rounded-2xl transition-all duration-300
+           hover:bg-surface-high hover:border-border-hover active:scale-95 flex items-center justify-center;
+  }
+
+  /* ── Inputs ── */
+  .input-field {
+    @apply w-full border border-border rounded-2xl px-5 py-4 text-content
+           transition-all outline-none focus:ring-4 focus:border-muted font-medium;
+    background-color: color-mix(in srgb, var(--surface) 30%, transparent);
+  }
+
+  .input-field::placeholder {
+    color: color-mix(in srgb, var(--muted) 40%, transparent);
+  }
+
+  .input-field:focus {
+    background-color: color-mix(in srgb, var(--surface) 50%, transparent);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 12%, transparent);
+  }
+
+  .dashboard-search-shell {
+    position: relative;
+    overflow: hidden;
+    border-radius: 28px;
+    border: 1px solid color-mix(in srgb, var(--border) 92%, transparent);
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 94%, transparent) 0%,
+      color-mix(in srgb, var(--surface-high) 22%, transparent) 100%
+    );
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.12);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .dashboard-search-shell::before {
+    content: "";
+    position: absolute;
+    inset-inline: 1.25rem;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, color-mix(in srgb, var(--primary) 18%, transparent) 48%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .dashboard-search-shell:focus-within {
+    border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--primary) 10%, transparent),
+      0 18px 38px rgba(0, 0, 0, 0.16);
+  }
+
+  .dashboard-search-input {
+    width: 100%;
+    background: transparent;
+    color: var(--content);
+    -webkit-text-fill-color: var(--content);
+    caret-color: var(--primary);
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .dashboard-search-input::placeholder {
+    color: color-mix(in srgb, var(--muted) 58%, transparent);
+  }
+
+  .dashboard-search-input:-webkit-autofill,
+  .dashboard-search-input:-webkit-autofill:hover,
+  .dashboard-search-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--content);
+    box-shadow: 0 0 0 1000px color-mix(in srgb, var(--surface) 94%, transparent) inset;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  .directory-search-input {
+    color: color-mix(in srgb, var(--bg) 88%, var(--content));
+    -webkit-text-fill-color: color-mix(in srgb, var(--bg) 88%, var(--content));
+    caret-color: var(--primary);
+    font-weight: 600;
+  }
+
+  .directory-search-input::placeholder {
+    color: color-mix(in srgb, var(--muted) 72%, transparent);
+  }
+
+  .directory-search-input:-webkit-autofill,
+  .directory-search-input:-webkit-autofill:hover,
+  .directory-search-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: color-mix(in srgb, var(--bg) 88%, var(--content));
+    box-shadow: 0 0 0 1000px #f7f4ee inset;
+    transition: background-color 9999s ease-in-out 0s;
+  }
+
+  .input-label {
+    @apply block text-[11px] font-medium tracking-[0.06em] text-muted mb-3 pl-1;
+  }
+
+  /* ── Badges ── */
+  .badge {
+    @apply inline-flex items-center text-[10px] font-semibold tracking-[0.08em] px-3 py-1.5 rounded-xl border;
+  }
+
+  .badge-super30 { @apply badge bg-primary text-bg border-primary; }
+  .badge-school { @apply badge bg-surface-high border-border text-muted; }
+  .badge-open {
+    @apply badge text-emerald-400;
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   PREMIUM SWITCH
+   ═══════════════════════════════════════════ */
+.premium-switch {
+  --switch-w: 44px;
+  --switch-h: 24px;
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--switch-w);
+  height: var(--switch-h);
+  @apply transition-all duration-500 rounded-full relative cursor-pointer border;
+  background-color: color-mix(in srgb, var(--surface-high) 60%, transparent);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.premium-switch::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  @apply absolute top-1 left-1 bg-muted rounded-full transition-all duration-500 shadow-md;
+}
+
+.premium-switch:checked {
+  @apply bg-primary;
+}
+
+.premium-switch:checked::before {
+  @apply left-[calc(100%-16px-4px)] bg-bg;
+}

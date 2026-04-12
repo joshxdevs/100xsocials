@@ -1,0 +1,53 @@
+# ── Environment variables ──────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Dependencies ───────────────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+
+# ── Build output ───────────────────────────────────────────────────────────────
+dist/
+build/
+out/
+
+# ── Prisma generated client ────────────────────────────────────────────────────
+backend/src/generated/
+backend/node_modules/.prisma/
+
+# ── Logs ───────────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+
+# ── Scratch / one-off scripts ──────────────────────────────────────────────────
+backend/get-otp.js
+backend/get-otp2.js
+backend/set-otp.ts
+backend/test-prisma.js
+backend/test-prisma2.js
+backend/otp-out.txt
+frontend/fix-css.js
+frontend/replace-colors.cjs
+
+# ── OS & editor artifacts ──────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# ── TypeScript cache ───────────────────────────────────────────────────────────
+*.tsbuildinfo
+
+# ── Misc ───────────────────────────────────────────────────────────────────────
+.cache/
+.turbo/
