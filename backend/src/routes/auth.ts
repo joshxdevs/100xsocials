@@ -45,12 +45,16 @@ router.post('/send-otp', otpRateLimit, async (req: Request, res: Response): Prom
 
     // For MEMBER: check whitelist
     if (role === 'MEMBER') {
-      const whitelisted = await prisma.whitelistEmail.findUnique({
-        where: { email: email.toLowerCase() },
-      });
-      if (!whitelisted || !whitelisted.isActive) {
-        res.status(403).json({ error: 'This email is not on the whitelist. Access is invite-only for builders.' });
-        return;
+      const isAdmin = process.env.ADMIN_EMAIL && email.toLowerCase() === process.env.ADMIN_EMAIL.toLowerCase();
+
+      if (!isAdmin) {
+        const whitelisted = await prisma.whitelistEmail.findUnique({
+          where: { email: email.toLowerCase() },
+        });
+        if (!whitelisted || !whitelisted.isActive) {
+          res.status(403).json({ error: 'This email is not on the whitelist. Access is invite-only for builders.' });
+          return;
+        }
       }
     }
 
