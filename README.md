@@ -1,5 +1,6 @@
 <div align="center">
   <h1>100x Socials</h1>
+  <p><strong>Live Platform:</strong> <a href="https://100xsocials.joshuapaul.site/login">100xsocials.joshuapaul.site/login</a></p>
   <p>An invite-only, AI-powered professional network and talent marketplace connecting high-quality builders with top-tier tech recruiters.</p>
 </div>
 
