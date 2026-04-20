@@ -5,10 +5,8 @@ import { requireAuth, requireRole, AuthRequest } from '../middleware/auth';
 
 const router = Router();
 
-// All admin routes require ADMIN role
 router.use(requireAuth, requireRole('ADMIN'));
 
-// GET /admin/whitelist
 router.get('/whitelist', async (_req: AuthRequest, res: Response): Promise<void> => {
   try {
     const emails = await prisma.whitelistEmail.findMany({
@@ -20,7 +18,6 @@ router.get('/whitelist', async (_req: AuthRequest, res: Response): Promise<void>
   }
 });
 
-// POST /admin/whitelist — add single email
 router.post('/whitelist', async (req: AuthRequest, res: Response): Promise<void> => {
   const schema = z.object({
     email: z.string().email(),
@@ -45,7 +42,6 @@ router.post('/whitelist', async (req: AuthRequest, res: Response): Promise<void>
   }
 });
 
-// POST /admin/whitelist/csv — bulk import
 router.post('/whitelist/csv', async (req: AuthRequest, res: Response): Promise<void> => {
   const schema = z.object({
     entries: z.array(z.object({
@@ -80,7 +76,6 @@ router.post('/whitelist/csv', async (req: AuthRequest, res: Response): Promise<v
   }
 });
 
-// DELETE /admin/whitelist/:id
 router.delete('/whitelist/:id', async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const entry = await prisma.whitelistEmail.findUnique({
@@ -129,7 +124,6 @@ router.delete('/whitelist/:id', async (req: AuthRequest, res: Response): Promise
   }
 });
 
-// PATCH /admin/whitelist/:id/toggle — activate/deactivate
 router.patch('/whitelist/:id/toggle', async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const entry = await prisma.whitelistEmail.findUnique({ where: { id: req.params.id as string } });
@@ -147,7 +141,6 @@ router.patch('/whitelist/:id/toggle', async (req: AuthRequest, res: Response): P
   }
 });
 
-// GET /admin/users — list all members
 router.get('/users', async (_req: AuthRequest, res: Response): Promise<void> => {
   try {
     const users = await prisma.user.findMany({
@@ -172,7 +165,6 @@ router.get('/users', async (_req: AuthRequest, res: Response): Promise<void> => 
   }
 });
 
-// GET /admin/recruiters — list all recruiters
 router.get('/recruiters', async (_req: AuthRequest, res: Response): Promise<void> => {
   try {
     const recruiters = await prisma.user.findMany({
@@ -188,7 +180,6 @@ router.get('/recruiters', async (_req: AuthRequest, res: Response): Promise<void
   }
 });
 
-// GET /admin/deleted-members — list deleted whitelist/recruiter records
 router.get('/deleted-members', async (_req: AuthRequest, res: Response): Promise<void> => {
   try {
     const deletedMembers = await prisma.deletedMemberLog.findMany({
@@ -200,7 +191,6 @@ router.get('/deleted-members', async (_req: AuthRequest, res: Response): Promise
   }
 });
 
-// DELETE /admin/recruiters/:id
 router.delete('/recruiters/:id', async (req: AuthRequest, res: Response): Promise<void> => {
   try {
     const recruiter = await prisma.user.findFirst({
@@ -243,7 +233,6 @@ router.delete('/recruiters/:id', async (req: AuthRequest, res: Response): Promis
   }
 });
 
-// GET /admin/stats
 router.get('/stats', async (_req: AuthRequest, res: Response): Promise<void> => {
   try {
     const [totalMembers, whitelistCount, recruiterCount, pendingProfiles] = await Promise.all([
