@@ -1,26 +1,26 @@
 <div align="center">
-  <h1>🚀 100x Socials</h1>
+  <h1>100x Socials</h1>
   <p>An invite-only, AI-powered professional network and talent marketplace connecting high-quality builders with top-tier tech recruiters.</p>
 </div>
 
 ---
 
-## 📖 Overview
+## Overview
 
 **100x Socials** solves the noise problem in modern recruiting by entirely gating access. Builders can only join via an admin-curated whitelist, ensuring that recruiters get access to a highly vetted talent pool. The platform features passwordless authentication, role-based dashboards, and Google Gemini artificial intelligence to automate ATS stringency checks on uploaded resumes.
 
-## ✨ Key Features
+## Key Features
 
-- **🛡️ Invite-Only Ecosystem:** Access is strictly controlled via an Admin whitelist.
-- **✉️ Passwordless Auth:** Secure OTP (One-Time Password) login flow handled via email tokens, protected by robust API rate limiting.
-- **🤖 AI Resume Parsing:** Integrates Google Gemini LLMs to automatically parse uploaded PDFs, generate ATS scores, and create highly searchable tech tags.
-- **🎭 Role-Based Access Control (RBAC):** Three distinct layers of access:
+- **Invite-Only Ecosystem:** Access is strictly controlled via an Admin whitelist.
+- **Passwordless Auth:** Secure OTP (One-Time Password) login flow handled via email tokens, protected by robust API rate limiting.
+- **AI Resume Parsing:** Integrates Google Gemini LLMs to automatically parse uploaded PDFs, generate ATS scores, and create highly searchable tech tags.
+- **Role-Based Access Control (RBAC):** Three distinct layers of access:
   - **Members:** Can build out rich profiles, manage their job status, and receive ATS feedback.
   - **Recruiters:** Access a powerful talent directory with advanced filtering.
   - **Admins:** Full control over the platform whitelist, user management, and metrics.
-- **☁️ Cloud Hosted Media:** Secure avatar and raw document storage via Cloudinary.
+- **Cloud Hosted Media:** Secure avatar and raw document storage via Cloudinary.
 
-## 💻 Tech Stack
+## Tech Stack
 
 ### Frontend
 - **Framework:** React 18 & Vite
@@ -42,7 +42,7 @@
 
 ---
 
-## 🚀 Local Development Setup
+## Local Development Setup
 
 ### Prerequisites
 - Node.js (v18+)
@@ -90,7 +90,7 @@ The frontend will launch at `http://localhost:5173` and automatically proxy API 
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```bash
 100x-socials/
@@ -113,5 +113,5 @@ The frontend will launch at `http://localhost:5173` and automatically proxy API 
 
 ---
 
-## 📄 License
+## License
 This project is proprietary and confidential.
