@@ -128,6 +128,6 @@ The frontend will launch at `http://localhost:5173` and automatically proxy API 
 ```
 
 ---
-
 ## License
-This project is proprietary and confidential.
+
+This project is licensed under the MIT License
